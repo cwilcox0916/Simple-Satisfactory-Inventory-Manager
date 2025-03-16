@@ -2,7 +2,7 @@
 
 A lightweight, browser-based inventory management tool for Satisfactory 1.0. Keep track of all your factory's resources, components, and project parts with this easy-to-use application.
 
-![Satisfactory Inventory Manager Screenshot](https://raw.githubusercontent.com/cwilcox0916/Simple-Satisfactory-Inventory-Manager/main/screenshot/screenshot.png)
+![Satisfactory Inventory Manager Screenshot](https://raw.githubusercontent.com/cwilcox0916/Simple-Satisfactory-Inventory-Manager/main/screenshot/Screenshot 2025-03-15 213957.png)
 
 ## Features
 
