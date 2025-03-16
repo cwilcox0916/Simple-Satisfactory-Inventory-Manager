@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Satisfactory Inventory Manager</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Satisfactory Inventory Manager</h1>
+      <div class="save-management">
+        <select id="saves-dropdown" class="saves-dropdown"></select>
+        <button id="new-save-btn" class="action-btn">New Save</button>
+        <button id="rename-save-btn" class="action-btn">Rename Save</button>
+        <button id="delete-save-btn" class="action-btn">Delete Save</button>
+      </div>
+      <div class="header-buttons">
+        <button id="add-part-btn" class="action-btn">Add New Part</button>
+        <button id="export-btn" class="action-btn">Export Data</button>
+        <button id="import-btn" class="action-btn">Import Data</button>
+        <!-- Reset button will be added here by JavaScript -->
+      </div>
+    </header>
+    
+    <main>
+      <div class="controls">
+        <div class="search-container">
+          <input type="text" id="search-input" placeholder="Search parts...">
+        </div>
+        <div class="filter-buttons">
+          <button id="show-all" class="filter-btn active">All</button>
+          <button id="show-surplus" class="filter-btn">Surplus</button>
+          <button id="show-deficit" class="filter-btn">Deficit</button>
+        </div>
+      </div>
+
+      <div class="category-tabs">
+        <button class="tab-btn active" data-category="all">All Categories</button>
+        <button class="tab-btn" data-category="Raw Resources">Raw Resources</button>
+        <button class="tab-btn" data-category="Refined Resources">Refined Resources</button>
+        <button class="tab-btn" data-category="Intermediate Products">Intermediate Products</button>
+        <button class="tab-btn" data-category="Consumables and By-products">Consumables</button>
+        <button class="tab-btn" data-category="Advanced Components">Advanced</button>
+        <button class="tab-btn" data-category="Project Parts">Project Parts</button>
+      </div>
+      
+      <div class="inventory-container">
+        <table id="inventory-table">
+          <thead>
+            <tr>
+              <th>Part</th>
+              <th>Quantity</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="inventory-body">
+            <!-- Inventory items will be added here dynamically -->
+          </tbody>
+        </table>
+      </div>
+    </main>
+    
+    <footer>
+      <p>Satisfactory Inventory Manager - Save data is stored locally in your browser</p>
+    </footer>
+  </div>
+
+  <!-- Modal for importing data -->
+  <div id="import-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2>Import Inventory Data</h2>
+      <p>Paste your JSON inventory data below:</p>
+      <textarea id="import-data" rows="10"></textarea>
+      <div class="modal-buttons">
+        <button id="confirm-import" class="action-btn">Import</button>
+        <button id="cancel-import" class="action-btn">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for adding new part -->
+  <div id="add-part-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2>Add New Part</h2>
+      <form id="add-part-form">
+        <div class="form-group">
+          <label for="part-name">Part Name:</label>
+          <input type="text" id="part-name" required>
+        </div>
+        <div class="form-group">
+          <label for="part-id">Part ID (no spaces, lowercase, e.g., 'heavy-modular-frame'):</label>
+          <input type="text" id="part-id" required pattern="[a-z0-9-]+">
+        </div>
+        <div class="form-group">
+          <label for="part-category">Category:</label>
+          <select id="part-category" required>
+            <option value="">Select a category</option>
+            <option value="Raw Resources">Raw Resources</option>
+            <option value="Refined Resources">Refined Resources</option>
+            <option value="Intermediate Products">Intermediate Products</option>
+            <option value="Consumables and By-products">Consumables and By-products</option>
+            <option value="Advanced Components">Advanced Components</option>
+            <option value="Project Parts">Project Parts</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="initial-quantity">Initial Quantity:</label>
+          <input type="number" id="initial-quantity" value="0">
+        </div>
+        <div class="modal-buttons">
+          <button type="submit" id="confirm-add-part" class="action-btn">Add Part</button>
+          <button type="button" id="cancel-add-part" class="action-btn">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal for new save -->
+  <div id="new-save-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2>Create New Save</h2>
+      <form id="new-save-form">
+        <div class="form-group">
+          <label for="save-name">Save Name:</label>
+          <input type="text" id="save-name" required>
+        </div>
+        <div class="modal-buttons">
+          <button type="submit" id="confirm-new-save" class="action-btn">Create</button>
+          <button type="button" id="cancel-new-save" class="action-btn">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal for rename save -->
+  <div id="rename-save-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2>Rename Save</h2>
+      <form id="rename-save-form">
+        <div class="form-group">
+          <label for="new-save-name">New Save Name:</label>
+          <input type="text" id="new-save-name" required>
+        </div>
+        <div class="modal-buttons">
+          <button type="submit" id="confirm-rename-save" class="action-btn">Rename</button>
+          <button type="button" id="cancel-rename-save" class="action-btn">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html> 
